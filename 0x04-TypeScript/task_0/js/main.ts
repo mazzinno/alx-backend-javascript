@@ -1,42 +1,67 @@
-// Write an interface named Student that accepts the following elements: firstName(string), lastName(string), age(number), and location(string)
-// Create two students, and create an array named studentsList containing the two variables
-// Using Vanilla Javascript, render a table and for each elements in the array, append a new row to the table
-// Each row should contain the first name of the student and the location
-
-// Define the Student interface
 interface Student {
-	firstName: string;
-	lastName: string;
-	age: number;
-	location: string;
+  firstName: string,
+  lastName: string,
+  age: number,
+  location: string
 }
 
-// Create two student objects
-const firstStudent: Student = {
-	firstName: "Obed",
-	lastName: "Ehoneah",
-	age: 97,
-	location: "Accra"
+const student1: Student = {
+  firstName: 'Paul',
+  lastName: 'Jerry',
+  age: 27,
+  location: 'Nigeria'
 }
 
-const secondStudent: Student = {
-	firstName: "Frank",
-	lastName: "Ehoneah",
-	age: 79,
-	location: "Kumasi"
+const student2: Student = {
+  firstName: 'Jerry',
+  lastName: 'Parkerson',
+  age: 28,
+  location: 'Edo state'
 }
 
-// Create an array of students
-const studentsList = [firstStudent, secondStudent];
+const studentList: Array<Student> = [student1, student2];
 
-const table = document.getElementById('studentTable') as HTMLTableElement;
+const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
+const table: HTMLTableElement = document.createElement('table');
+const thead: HTMLTableSectionElement = document.createElement('thead');
+const th1: HTMLTableCellElement = document.createElement('th');
+const th2: HTMLTableCellElement = document.createElement('th');
 
-// Create a new row for each student and append it to the table
-studentsList.forEach((student) => {
-	const row = table.insertRow();
-	const firstNameCell = row.insertCell(0);
-	const locationCell = row.insertCell(1);
+th1.innerText = 'First Name';
+th2.innerText = 'Location';
+th1.style.border = '1px solid gray';
+th2.style.border = '1px solid gray';
+th1.style.padding = '.5rem';
+th2.style.padding = '.5rem';
+table.style.border = '1px solid gray';
+table.style.borderCollapse = 'collapse';
 
-	firstNameCell.innerHTML = student.firstName;
-	locationCell.innerHTML = student.location;
-})
+
+
+thead.append(th1);
+thead.append(th2);
+
+table.append(thead);
+
+
+studentList.forEach((student) => {
+  const row: HTMLTableRowElement = document.createElement('tr');
+
+  const column1: HTMLTableCellElement = document.createElement('td');
+  const column2: HTMLTableCellElement = document.createElement('td');
+
+  column1.innerText = student.firstName;
+  column2.innerText = student.lastName;
+
+  column1.style.border = '1px solid gray';
+  column2.style.border = '1px solid gray';
+  column1.style.padding = '.5rem';
+  column2.style.padding = '.5rem';
+
+  row.append(column1);
+  row.append(column2)
+
+  table.append(row);
+});
+
+body.append(table)
